@@ -74,7 +74,7 @@ GROUP BY
 ORDER BY 
     Year;
 ```
-### 3. Sequencial Analysis
+### 4. Sequencial Analysis
 
 **Query:**
 
