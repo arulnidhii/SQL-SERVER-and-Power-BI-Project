@@ -9,7 +9,9 @@ This project aims to analyze the performance and trends of pharmaceutical produc
 1. **Product Popularity:** Which products are the most prescribed?
 2. **Pack Performance:** Which packs have the highest total links?
 3. **Trend Analysis:** How have product prescriptions changed over the last five years?
-4. **Relationship Analysis:** What are the common relationships between prescribable products?
+4. **Sequencial Analysis:** How have the number of published title evolved over the years,
+and which authors and periods have had the most significant impact on the overall publication trend?
+5. **Relationship Analysis:** What are the common relationships between prescribable products?
 
 ## Solution Approach
 
@@ -72,8 +74,36 @@ GROUP BY
 ORDER BY 
     Year;
 ```
+### 3. Sequencial Analysis
 
-### 4. Relationship Analysis
+**Query:**
+
+```sql
+
+SELECT Author
+,[Year]
+,no_of_titles as [Number of Titles] 
+FROM	(
+		SELECT 
+		CONCAT(a.au_fname, ' ', a.au_lname) AS Author
+		,year(c.pubdate) as [Year]
+		,count(b.title_id) as no_of_titles
+		FROM		[DBATest].[dbo].[authors] a
+
+		INNER JOIN	[DBATest].[dbo].[titleauthor] b
+		ON			a.au_id = b.au_id
+
+		INNER JOIN	[DBATest].[dbo].[titles] c
+		ON			b.title_id = c.title_id
+
+		Group by CONCAT(a.au_fname, ' ', a.au_lname)
+		,year(c.pubdate)
+)aa
+Order by 1
+
+```
+
+### 5. Relationship Analysis
 
 **Query:**
 
