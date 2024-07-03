@@ -15,7 +15,7 @@ This project aims to analyze the performance and trends of pharmaceutical produc
 
 We solved these business questions by executing SQL queries on the `DBATest` database in SQL Server and visualizing the results in Power BI.
 
-## Queries and Explanations
+## Queries
 
 ### 1. Product Popularity
 
@@ -93,5 +93,4 @@ GROUP BY
 ORDER BY 
     TotalRelationships DESC;
 
-```sql
-
+```
