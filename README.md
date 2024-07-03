@@ -4,7 +4,7 @@
 
 This project aims to analyze the performance and trends of pharmaceutical products using SQL Server for data management and Power BI for visualization. The analysis covers various aspects, including product popularity, pack performance, trend analysis, relationship mapping, and market status distribution.
 
-## Business Questions
+## Objectives
 
 1. **Product Popularity:** Which products are the most prescribed?
 2. **Pack Performance:** Which packs have the highest total links?
@@ -13,7 +13,7 @@ This project aims to analyze the performance and trends of pharmaceutical produc
 
 ## Solution Approach
 
-We solved these business questions by executing SQL queries on the `DBATest` database in SQL Server and visualizing the results in Power BI.
+We solved these objectives by executing SQL queries on the `DBATest` database in SQL Server and visualizing the results in Power BI.
 
 ## Queries
 
