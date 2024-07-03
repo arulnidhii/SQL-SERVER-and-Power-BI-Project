@@ -21,8 +21,8 @@ We solved these business questions by executing SQL queries on the `DBATest` dat
 ### 1. Product Popularity
 
 **Query:**
+'''sql
 
-```sql
 SELECT 
     pp.sProductDisplayName,
     COUNT(lp.iPrescribableProductID) AS TotalPrescriptions
