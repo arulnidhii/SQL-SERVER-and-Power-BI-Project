@@ -33,3 +33,21 @@ JOIN
 GROUP BY 
     pp.sProductDisplayName;
 
+### 2. Pack Performance
+
+**Query:**
+
+'''sql
+SELECT 
+    p.sPackDisplayName,
+    COUNT(lp.iDispensiblePackID) AS TotalLinks
+FROM 
+    [DBATest].[dbo].[SX_Pack] p
+JOIN 
+    [DBATest].[dbo].[SX_linkPack] lp ON p.iDispensiblePackID = lp.iDispensiblePackID
+WHERE 
+    p.sPackDisplayName IS NOT NULL
+GROUP BY 
+    p.sPackDisplayName
+ORDER BY 
+    TotalLinks DESC;
