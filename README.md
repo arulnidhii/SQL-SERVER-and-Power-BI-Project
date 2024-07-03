@@ -21,7 +21,8 @@ We solved these business questions by executing SQL queries on the `DBATest` dat
 ### 1. Product Popularity
 
 **Query:**
-'''sql
+
+```sql
 
 SELECT 
     pp.sProductDisplayName,
@@ -32,7 +33,7 @@ JOIN
     [DBATest].[dbo].[SX_linkPack] lp ON pp.iPrescribableProductID = lp.iPrescribableProductID
 GROUP BY 
     pp.sProductDisplayName;
-
+```
 ### 2. Pack Performance
 
 **Query:**
