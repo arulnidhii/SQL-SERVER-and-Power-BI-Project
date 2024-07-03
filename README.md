@@ -10,7 +10,6 @@ This project aims to analyze the performance and trends of pharmaceutical produc
 2. **Pack Performance:** Which packs have the highest total links?
 3. **Trend Analysis:** How have product prescriptions changed over the last five years?
 4. **Relationship Analysis:** What are the common relationships between prescribable products?
-5. **Market Status:** What is the market status distribution of all packs?
 
 ## Solution Approach
 
@@ -38,7 +37,7 @@ GROUP BY
 
 **Query:**
 
-'''sql
+```sql
 SELECT 
     p.sPackDisplayName,
     COUNT(lp.iDispensiblePackID) AS TotalLinks
@@ -52,3 +51,47 @@ GROUP BY
     p.sPackDisplayName
 ORDER BY 
     TotalLinks DESC;
+```
+
+### 3. Trend Analysis
+
+**Query:**
+
+```sql
+SELECT 
+    YEAR(lp.dDate) AS Year,
+    COUNT(lp.iPrescribableProductID) AS TotalPrescriptions
+FROM 
+    [DBATest].[dbo].[SX_linkPack] lp
+JOIN 
+    [DBATest].[dbo].[SX_PrescribableProduct] pp ON lp.iPrescribableProductID = pp.iPrescribableProductID
+WHERE 
+    lp.dDate IS NOT NULL AND lp.dDate >= DATEADD(YEAR, -20, GETDATE())
+GROUP BY 
+    YEAR(lp.dDate)
+ORDER BY 
+    Year;
+```
+
+### 4. Relationship Analysis
+
+**Query:**
+
+```sql
+SELECT 
+    pp1.sProductDisplayName AS ProductFrom,
+    pp2.sProductDisplayName AS ProductTo,
+    COUNT(r.iRelationshipTypeID) AS TotalRelationships
+FROM 
+    [DBATest].[dbo].[SX_PrescribableProduct] pp1
+JOIN 
+    [DBATest].[dbo].[SX_PrescribableProductRelationship] r ON pp1.iPrescribableProductID = r.iPrescribableProductFromID
+JOIN 
+    [DBATest].[dbo].[SX_PrescribableProduct] pp2 ON r.iPrescribableProductToID = pp2.iPrescribableProductID
+GROUP BY 
+    pp1.sProductDisplayName, pp2.sProductDisplayName
+ORDER BY 
+    TotalRelationships DESC;
+
+```sql
+
